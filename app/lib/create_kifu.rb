@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 #coding:utf-8
+require 'yaml'
 
 r = Array.new
 r[0]= "P1-KY-KE-GI-KI-OU-KI-GI-KE-KY"
@@ -13,17 +14,16 @@ r[7] = "P8 * +KA *  *  *  *  * +HI * "
 r[8] = "P9+KY+KE+GI+KI+OU+KI+GI+KE+KY"
 
 #db = YAML::Store.new('../../data/kifu.yaml')
-File.open('../../data/kifu.data', 'w') do |file|
+File.open('../../public/data/kifu.data', 'w') do |file|
   h = Hash.new
   y = 1
   r.each do |s|
-    a = (s.scan(/(\-..|\+..|\*)/).reverse)
+    a = (s.scan(/(\-..|\+..|\*)/).reverse).flatten
     a.each_with_index do |item, i|
       locate = ((i + 1).to_s + y.to_s).to_i
-      h[locate] = item 
+      h[locate] = item
     end
     y += 1
   end
-  p h
-  file.puts h
+  file.puts h.to_yaml
 end
