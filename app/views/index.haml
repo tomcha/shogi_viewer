@@ -1,2 +1,8 @@
-%p
-  test
+%table
+  - yadd = 1
+  - 9.times do
+    %tr
+      - for i in (90 + yadd).step((10 + yadd), -10)
+        %td{id: i}
+          = @data[i]
+    - yadd += 1
