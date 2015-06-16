@@ -3,7 +3,7 @@
 require 'yaml'
 
 r = Array.new
-r[0]= "P1-KY-KE-GI-KI-OU-KI-GI-KE-KY"
+r[0] = "P1-KY-KE-GI-KI-OU-KI-GI-KE-KY"
 r[1] = "P2 * -HI *  *  *  *  * -KA * "
 r[2] = "P3-FU-FU-FU-FU-FU-FU-FU-FU-FU"
 r[3] = "P4 *  *  *  *  *  *  *  *  * "
