@@ -4,5 +4,13 @@
     %tr
       - for i in (90 + yadd).step((10 + yadd), -10)
         %td{id: i}
-          = @data[i]
+          = @current_kifu[i]
     - yadd += 1
+%p
+  先手持ち駒
+  - @current_kifu['+00'].each do |key, value|
+    = "#{key} : #{value}, "
+%p
+  後手持ち駒
+  - @current_kifu['-00'].each do |key, value|
+    = "#{key} : #{value}, "
