@@ -4,6 +4,7 @@ GEM
     diff-lcs (1.2.5)
     haml (4.0.6)
       tilt
+    logwriter (0.1.0)
     rack (1.6.1)
     rack-protection (1.5.3)
       rack
@@ -31,5 +32,9 @@ PLATFORMS
 
 DEPENDENCIES
   haml (~> 4.0.6)
+  logwriter
   rspec (~> 3.2.0)
   sinatra (~> 1.4.6)
+
+BUNDLED WITH
+   1.10.5
