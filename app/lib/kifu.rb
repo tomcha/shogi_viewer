@@ -3,7 +3,7 @@ class Kifu
   attr_reader :boad
   attr_reader :lw
 
-  def initialize(kifu_file)
+  def initialize
     default_boad = Array.new
     default_boad[0] = "P1-KY-KE-GI-KI-OU-KI-GI-KE-KY"
     default_boad[1] = "P2 * -HI *  *  *  *  * -KA * "
@@ -18,7 +18,7 @@ class Kifu
     @boad = Hash.new
     @boad['+00'] = Hash.new
     @boad['-00'] = Hash.new
-    @lw = Logwriter::Logger.new('./kifu.log')
+#    @lw = Logwriter::Logger.new('./kifu.log')
 
     y = 1
     default_boad.each do |s|
@@ -29,7 +29,7 @@ class Kifu
       end
       y += 1
     end
-    @lw.v @boad
+#    @lw.v @boad
   end
 
   def create_yaml(kifu_file)
@@ -37,22 +37,24 @@ class Kifu
     require 'yaml'
     #fileの有無チェック
     File.open(kifu_file, 'w') do |file|
-      file.puts @bord.to_yaml
+      file.puts @boad.to_yaml
     end
   end
   #db = YAML::Store.new('../../data/kifu.yaml')
   
   def change_boad(teban, before_place, after_place, unit)
-    @lw.v [teban, before_place, after_place, unit], 'cahnge_boad引数'
-#    puts "bp: #{before_place}"
+#    @lw.v [teban, before_place, after_place, unit], 'cahnge_boad引数'
     if( before_place == 0)
-#      puts "#{unit}:#{@boad[teban + '00'][unit].to_i}"
-      @lw.v unit, 'before_unit_name:'
+#      @lw.v before_place, 'before_place_value'
+#      @lw.v unit, 'before_unit_name:'
+#      @lw.v @boad
       @boad["#{teban}00"][unit] -= 1
+#      @lw.f 1
+#      @lw.v @boad
     end
 
     if(@boad[after_place] != '*')
-      @lw.v [after_place, @boad[after_place]], 'after_unit_name:'
+#      @lw.v [after_place, @boad[after_place]], 'after_unit_name:'
       take_unit(after_place)
     end
     
@@ -62,7 +64,6 @@ class Kifu
 
   def take_unit(after_place)
     @boad[after_place] =~ /^(\+|\-)(..)$/
-#    puts $2
 
     case $2
     when 'TO'
@@ -89,13 +90,3 @@ class Kifu
 
   end
 end
-
-
-#k = Kifu.new('./test.yaml')
-#p k.kifudata
-#
-#
-#{ '-00' => { 'FU' => 0, ...},
-#  '+00' => { 'FU' => 0, ...},
-#}
-#

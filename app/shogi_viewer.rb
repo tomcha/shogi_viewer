@@ -6,12 +6,11 @@ require 'yaml'
 require 'logwriter'
 require_relative 'lib/kifu'
 
-@lw = Logwriter::Logger.new('./shogi_viewr.log')
 class Shogi_viewer < Sinatra::Base
   set :public_folder, File.expand_path(File.join(root, '..', 'public'))
 
   configure do
-    @@current_kifu = Kifu.new('../public/data/kifu.data')
+    @@current_kifu = Kifu.new
     @@current_kifu.create_yaml('./public/data/kifu.data')
   end
 
@@ -21,7 +20,12 @@ class Shogi_viewer < Sinatra::Base
   end
 
   get '/newgame' do
-    @@current_kifu = Kifu.new('../public/data/kifu.data')
+    @@current_kifu = Kifu.new
+    @@current_kifu.create_yaml('./public/data/kifu.data')
+    redirect '/'
+  end
+
+  get '/writekifu' do
     @@current_kifu.create_yaml('./public/data/kifu.data')
     redirect '/'
   end
